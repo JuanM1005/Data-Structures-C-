@@ -3,6 +3,7 @@
 
 /*
     Aguirre Mares Juan Antonio - Ingenieria Informatica
+    Centro Universitario de Ciencias Exactas e Ingenierías (CUCEI)
     Universidad de Guadalajara
     27/04/2025
 */ 
