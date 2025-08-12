@@ -1,6 +1,13 @@
 #include <iostream>
 #include "Menu.cpp"
 
+/*
+    Aguirre Mares Juan Antonio - Ingenieria Informatica
+    Centro Universitario de Ciencias Exactas e Ingenierías (CUCEI)
+    Universidad de Guadalajara
+    20/04/2025
+*/
+
 using namespace std;
 
 int main() {
