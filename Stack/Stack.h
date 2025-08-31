@@ -17,7 +17,8 @@ class Stack {
         void push(int value);  
         void pop();        
         int top();       
-        void display();          
+        void display();    
+        void display_inpop();      
 };
 
 #endif

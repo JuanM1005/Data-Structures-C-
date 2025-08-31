@@ -45,3 +45,14 @@ void Stack::display() {
     }
     std::cout << std::endl;
 }
+
+void Stack::display_inpop() {
+    std::string pause; // variable to capture ENTER
+    while (!isEmpty()) {
+        std::cout << "Top: " << top() << " (press ENTER to pop)";
+        std::getline(std::cin, pause);  // wait for ENTER
+        pop();
+    }
+
+    std::cout << "\nStack is now empty." << std::endl;
+}

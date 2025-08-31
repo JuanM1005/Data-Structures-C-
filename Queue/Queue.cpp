@@ -37,7 +37,7 @@ int Queue::getFront() {
     return elements[front];
 }   
 
-void Queue::displayQueue() {
+void Queue::display() {
     if(isEmpty()) {
         std::cout << "Queue is empty" << std::endl;
         return;
@@ -48,4 +48,15 @@ void Queue::displayQueue() {
     }
 
     std::cout << std::endl;
+}
+
+void Queue::display_indeuqeue() {
+    std::string pause; // variable to capture ENTER
+    while(!isEmpty()) {
+        std::cout << "Front: " << getFront() << " (press ENTER to dequeue)";
+        std::getline(std::cin, pause); // wait for ENTER
+        dequeue();
+    }
+
+     std::cout << "Queue now is empty." << std::endl;
 }

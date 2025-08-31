@@ -8,29 +8,45 @@
     30/08/2025
 */
 
+void firstFill20(Stack& s);
+
 int main() {
     Stack s;
 
     try {
-        s.push(10);
-        s.push(20);
-        s.push(30);
+        firstFill20(s);
 
-        s.display(); // Output: 30 20 10
+        s.display(); // Output: 20...15...1
 
         std::cout << "Top element: " << s.top() << std::endl;
 
         s.pop();
-        s.display(); // Output: 20 10
+        s.display(); // Output: 19...15...1
 
         s.pop();
         s.pop();
-        s.pop(); // This will throw an exception
+        s.pop(); // Output: 16...10...1
+        
+        std::cout << std::endl;
+        s.display();
+
+        std::cout << std::endl;
+        s.display_inpop();
     }
     catch (const std::runtime_error& e) {
-        // Catch runtime errors and display message
         std::cout << "Exception caught: " << e.what() << std::endl;
     }
 
     return 0;
+}
+
+void firstFill20(Stack& s) {
+    for(int i = 1; i <= 20; i++) {
+        if (s.isFull()) {
+            std::cout << "Stack is full. Could not insert all 20 numbers." << std::endl;
+            break;
+        }
+
+        s.push(i);
+    }
 }
