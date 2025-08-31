@@ -14,6 +14,8 @@ Minimalist implementations of essential data structures and sorting algorithms i
 | `DynamicArray`     | Vector-like resizable array          | Push/Pop, Random access  |
 | `SinglyLinkedList` | Linear node chain                    | Add/Remove at head/tail  |
 | `LinkedQueue`      | FIFO implementation                  | Enqueue, Dequeue         |
+| `Stack`            | LIFO implementation                  | Push, Pop, Top, Display         |
+| `Queue`            | FIFO implementation                  | Enqueue, Dequeue, Front, Display|
 
 ## 🔄 **Sorting Algorithms**
 | Name             | Time (Worst) | Stable? | In-Place? |
