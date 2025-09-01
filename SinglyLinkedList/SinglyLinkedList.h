@@ -33,7 +33,7 @@ template <class T>
             ~SinglyLinkedList();
 
             // Inserts a new node at the beginning of the list
-            void insertAtBeggining(const T& value);
+            void insertAtBeginning(const T& value);
 
             // Inserts a new node at the end of the list
             void insertAtEnd(const T& value);
@@ -73,6 +73,11 @@ template <class T>
 
             // Prints the list recursively
             void printRecursive();
-};
 
-#endif
+            // Given the head of a sorted linked list, delete all duplicates such that each element appears only once
+            void removeDuplicates();
+
+            // Sort elements
+            void sort();
+    };
+#endif // SINGLYLINKEDLIST_H

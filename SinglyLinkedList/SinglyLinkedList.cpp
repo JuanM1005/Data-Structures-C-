@@ -12,7 +12,7 @@ SinglyLinkedList<T>::~SinglyLinkedList() {
 
 // Inserts a new node at the beginning of the list
 template <class T>
-void SinglyLinkedList<T>::insertAtBeggining(const T& value) {
+void SinglyLinkedList<T>::insertAtBeginning(const T& value) {
     Node<T>* newNode = new Node<T>(value); // create new node
     newNode->next = head;                   // link new node to current head
     head = newNode;                         // update head to new node
@@ -48,7 +48,7 @@ void SinglyLinkedList<T>::insertAtPosition(const T& value, int position) {
 
     // if position is 0, insert at beginning
     if(position == 0) {
-        insertAtBeggining(value);
+        insertAtBeginning(value);
         return;
     }
 
@@ -245,4 +245,53 @@ template <class T>
 void SinglyLinkedList<T>::printRecursive() {
     printRecursiveHelper(head);
     std::cout << std::endl;
+}
+
+template <class T>
+void SinglyLinkedList<T>::removeDuplicates() {
+    if (isEmpty()) {
+        std::cout << "The list is empty. No duplicates to remove." << std::endl;
+        return;
+    }
+
+    Node<T>* current = head;
+
+    while (current != nullptr && current->next != nullptr) {
+        // if the current node's data is equal to the next node's data
+        if (current->data == current->next->data) { 
+            Node<T>* temp = current->next; // temporarily store the duplicate node
+            current->next = current->next->next; // skip the duplicate node
+            delete temp; // free the duplicate node's memory
+            count--;
+        } else {
+            current = current->next; // move to the next node if no duplicate
+        }
+    }
+}
+
+template <class T>
+void SinglyLinkedList<T>::sort() {
+    if (isEmpty() || head->next == nullptr) {
+        std::cout << "The list is empty or contains only one node. Sorting is not required." << std::endl;
+        return;
+    }
+
+    bool swapped;
+
+    do {
+        swapped = false;
+        Node<T>* current = head;
+
+        while (current->next != nullptr) {
+            if (current->data > current->next->data) {
+                T temp = current->data;
+                current->data = current->next->data;
+                current->next->data = temp;
+                swapped = true;
+            } else {
+                current = current->next;
+            }
+        }
+
+    } while (swapped);
 }

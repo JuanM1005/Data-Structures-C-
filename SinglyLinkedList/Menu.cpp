@@ -23,6 +23,8 @@ void menu() {
         cout << "11. Check if value exists\n";
         cout << "12. Get size\n";
         cout << "13. Clear list\n";
+        cout << "14. Remove duplicate elements\n";
+        cout << "15. Sort elements\n";
         cout << "0. Exit\n";
         cout << "Choose an option: ";
         cin >> option;
@@ -32,7 +34,7 @@ void menu() {
                 case 1:
                     cout << "Enter value to insert at beginning: ";
                     cin >> value;
-                    list.insertAtBeggining(value);
+                    list.insertAtBeginning(value);
                     break;
                 case 2:
                     cout << "Enter value to insert at end: ";
@@ -93,6 +95,15 @@ void menu() {
                 case 13:
                     list.clear();
                     cout << "List cleared.\n";
+                    break;
+                case 14:
+                    cout << "Sorting the list automatically before removing duplicates..." << endl;
+                    list.sort();
+                    list.removeDuplicates();
+                    list.print();
+                    break;
+                case 15:
+                    list.sort();
                     break;
                 case 0:
                     cout << "Goodbye!\n";
