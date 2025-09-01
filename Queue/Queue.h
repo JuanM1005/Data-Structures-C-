@@ -17,6 +17,7 @@ class Queue {
         bool isFull();
         void enqueue(int value);
         void dequeue();
+        int getRear();
         int getFront();
         void display();
         void display_indeuqeue();

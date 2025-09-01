@@ -29,6 +29,14 @@ void Queue::dequeue() {
     front++;
 }
 
+int Queue::getRear() {
+    if (isEmpty()) {
+        throw runtime_error("Queue is empty. Cannot get front.");
+    }
+
+    return elements[rear];
+} 
+
 int Queue::getFront() {
     if (isEmpty()) {
         throw runtime_error("Queue is empty. Cannot get front.");

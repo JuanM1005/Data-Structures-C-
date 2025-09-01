@@ -14,16 +14,18 @@ bool Stack::isFull() {
 
 void Stack::push(int value) {
     if (isFull()) {
-        throw std::runtime_error("Stack overflow: the stack is full.");
+        throw std::overflow_error("Stack overflow: the stack is full.");
     }
     elements[++topIndex] = value; // Increment topIndex and insert value
 }
 
 void Stack::pop() {
     if (isEmpty()) {
-        throw std::runtime_error("Stack underflow: the stack is empty.");
+        throw std::underflow_error("Stack underflow: the stack is empty.");
     }
-    topIndex--; // Simply decrease topIndex
+    
+    int removed = elements[topIndex--];
+    std::cout << removed << " popped from Stack." << std::endl;
 }
 
 int Stack::top() {
@@ -31,6 +33,10 @@ int Stack::top() {
         throw std::runtime_error("Cannot get top: the stack is empty.");
     }
     return elements[topIndex];
+}
+
+int Stack::size() {
+    return topIndex + 1;
 }
 
 void Stack::display() {
