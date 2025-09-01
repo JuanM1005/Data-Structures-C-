@@ -12,8 +12,9 @@ void menu(Queue& q) {
              << "2. Dequeue" << endl
              << "3. Size" << endl
              << "4. Front" << endl
-             << "5. Display" << endl
-             << "6. Display in dequeue" << endl
+             << "5. Rear" << endl
+             << "6. Display" << endl
+             << "7. Display in dequeue" << endl
              << "0. Exit" << endl
              << "Enter your choice: ";
         cin >> choice;
@@ -48,9 +49,16 @@ void menu(Queue& q) {
                 }
                 break;
             case 5:
-                q.display();
+                try {
+                    cout << "Rear element: " << q.getRear() << endl;
+                } catch (const std::runtime_error& e) {
+                    cout << e.what() << endl;
+                }
                 break;
             case 6:
+                q.display();
+                break;
+            case 7:
                 q.display_indeuqeue();
                 break;
             case 0:

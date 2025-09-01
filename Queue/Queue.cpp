@@ -31,7 +31,7 @@ void Queue::dequeue() {
 
 int Queue::getRear() {
     if (isEmpty()) {
-        throw runtime_error("Queue is empty. Cannot get front.");
+        throw runtime_error("Queue is empty. Cannot get rear.");
     }
 
     return elements[rear];
