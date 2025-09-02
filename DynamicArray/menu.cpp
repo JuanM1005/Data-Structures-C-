@@ -17,9 +17,10 @@ void menu() {
         cout << "5. Remove from end\n";
         cout << "6. Remove from position\n";
         cout << "7. Search for value\n";
-        cout << "8. Show array\n";
-        cout << "9. Get value at position\n";
-        cout << "10. Get size\n";
+        cout << "8. Seach for all ocurrences\n";
+        cout << "9. Show array\n";
+        cout << "10. Get value at position\n";
+        cout << "11. Get size\n";
         cout << "0. Exit\n";
         cout << "Choose an option: ";
         cin >> option;
@@ -69,15 +70,28 @@ void menu() {
                     }
                     break;
                 case 8:
+                    cout << "Enter value to search all: ";
+                    cin >> value;
+                    {
+                        DynamicArray<int> allFound = arr.searchAll(value);
+                        if (allFound.isEmpty())
+                            cout << "No values found.\n";
+                        else {
+                            cout << "Values found:\n";
+                            allFound.display();
+                        }
+                    }
+                    break;
+                case 9:
                     cout << "Array contents:\n";
                     arr.display();
                     break;
-                case 9:
+                case 10:
                     cout << "Enter position to get value (0-based): ";
                     cin >> position;
                     cout << "Value at position " << position << ": " << arr[position] << endl;
                     break;
-                case 10:
+                case 11:
                     cout << "Array size: " << arr.size() << endl;
                     break;
                 case 0:

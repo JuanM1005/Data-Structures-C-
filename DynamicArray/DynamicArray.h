@@ -60,7 +60,7 @@ public:
     T operator[](size_t pos) const;
 
     // Search for all occurrences of element and return a dynamic array of pointers to these elements
-    DynamicArray<T*> searchAll(const T& element);
+    DynamicArray<T> searchAll(const T& element);
 
     // Display the contents of the array to the console
     void display() const;

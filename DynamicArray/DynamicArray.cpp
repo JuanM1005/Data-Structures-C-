@@ -155,11 +155,11 @@ T DynamicArray<T>::operator[](size_t pos) const {
 }
 
 template <class T>
-DynamicArray<T*> DynamicArray<T>::searchAll(const T& element) {
-    DynamicArray<T*> results;         // Dynamic array to store pointers to matches
+DynamicArray<T> DynamicArray<T>::searchAll(const T& element) {
+    DynamicArray<T> results;         // Dynamic array to store copy to matches
     for (size_t i = 0; i < count; i++) {
         if (element == array[i]) {
-            results.addAtEnd(&array[i]);  // Add address of matched element
+            results.addAtEnd(array[i]);  // Add copy of matched element
         }
     }
     return results;
