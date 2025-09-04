@@ -1,0 +1,161 @@
+#include "DoubleLinkedList.h"
+
+template <class T>
+DoubleLinkedList<T>::DoubleLinkedList(): head(nullptr), tail(nullptr), count(0) {}
+
+template <class T>
+DoubleLinkedList<T>::~DoubleLinkedList() {
+    clear();
+}
+
+template <class T>
+void DoubleLinkedList<T>::insertAtBeginning(const T& value) {
+    Node<T>* newNode = new Node<T>(value);
+
+    if(!head) {
+        head = tail = newNode;
+        
+    } else {
+        newNode->next = head;
+        head->prev = newNode;
+        head = newNode;
+    }
+
+    count++;
+       
+}
+
+template <class T>
+void DoubleLinkedList<T>::insertAtEnd(const T& value) {
+    Node<T>* newNode = new Node<T>(value);
+
+    if(!tail) {
+        head = tail = newNode;
+    } else {
+        tail->next = newNode;
+        newNode->prev = tail;
+        tail = newNode;
+    }
+
+    count++;
+}
+
+template <class T>
+void DoubleLinkedList<T>::insertAtPosition(const T& value, int position) {
+    if(position < 0 || position > count) {
+        throw std::out_of_range("Invalid position");
+    }
+
+    if(position == 0) {
+        insertAtBeginning(value);
+        return;
+    }
+
+    if(position == count) {
+        insertAtEnd(value);
+        return;
+    }
+
+    Node<T>* newNode = new Node<T>(value);
+    Node<T>* current = head;
+
+    for(int i = 0; i < position; i++) {
+        current = current->next;
+    }
+
+    newNode->prev = current->prev;
+    newNode->next = current;
+    current->prev->next = newNode;
+    current->prev = newNode;
+    count++;
+}
+
+
+template <class T>
+void DoubleLinkedList<T>::removeAtBeginning() {
+    if (isEmpty()) {
+        throw std::underflow_error("Cannot remove from empty list");
+    }
+
+    Node<T>* temp = head;
+
+    if(head->next) {
+        head = head->next;
+        head->prev = nullptr;
+    } else {
+        head = tail = nullptr;
+    }
+
+    delete temp;
+    count--;
+}
+
+template <class T>
+void DoubleLinkedList<T>::removeAtEnd() {
+    if (isEmpty()) {
+        throw std::underflow_error("Cannot remove from empty list");
+    }
+
+    Node<T>* temp = tail;
+
+    if(tail->prev) {
+        tail = tail->prev;
+        tail->next = nullptr;
+    } else {
+        head = tail = nullptr;
+    }
+
+    delete temp;
+    count--;
+}
+
+template <class T>
+void DoubleLinkedList<T>::displayForward() const {
+    if (isEmpty()) return;
+
+    Node<T>* temp = head;
+    std::cout << "nullptr ";
+    while (temp != nullptr) {
+        std::cout << "<- " << temp->data << " -> ";
+        temp = temp->next;
+    }
+    std::cout << "nullptr" << std::endl;
+}
+
+template <class T>
+void DoubleLinkedList<T>::displayBackward() const {
+    if (isEmpty()) return;
+
+    Node<T>* temp = tail;
+    std::cout << "nullptr ";
+    while (temp != nullptr) {
+        std::cout << "<- " << temp->data << " -> ";
+        temp = temp->prev;
+    }
+    std::cout << "nullptr" << std::endl;
+}
+
+template <class T>
+bool DoubleLinkedList<T>::isEmpty() const {
+    return head == nullptr;
+}
+
+template <class T>
+void DoubleLinkedList<T>::clear() {
+    if (isEmpty()) {
+        std::cout << "List is already empty." << std::endl;
+        return;
+    }
+
+    while(!isEmpty()) {
+        removeAtBeginning();  
+    }
+
+    std::cout << "List cleared." << std::endl;
+}
+
+
+template <class T>
+int DoubleLinkedList<T>::size() const {
+    return count;
+}

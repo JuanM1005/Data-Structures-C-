@@ -5,7 +5,7 @@
 #include <stdexcept>
 
 // Template structure for a node in a singly linked list
-template <class T>
+template <typename T>
     struct Node {
         T data;              // The data stored in the node
         Node<T>* next;       // Pointer to the next node in the list
