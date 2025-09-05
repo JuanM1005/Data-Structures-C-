@@ -36,6 +36,7 @@ class DoubleLinkedList {
         bool isEmpty() const;
         void clear();
         int size() const;
+        void sort();
 };
 
 #endif

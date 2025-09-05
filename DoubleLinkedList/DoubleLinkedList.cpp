@@ -159,3 +159,30 @@ template <class T>
 int DoubleLinkedList<T>::size() const {
     return count;
 }
+
+template <class T>
+void DoubleLinkedList<T>::sort() {
+    if (isEmpty() || head->next == nullptr) {
+        std::cout << "The list is empty or contains only one node. Sorting is not required." << std::endl;
+        return;
+    }
+
+    bool swapped;
+
+    do {
+        swapped = false;
+        Node<T>* current = head;
+        
+        while (current->next != nullptr) {
+            if (current->data > current->next->data) {
+                T temp = current->data;
+                current->data = current->next->data;
+                current->next->data = temp;
+                swapped = true;
+            } else {
+                current = current->next;
+            }
+        }
+    } while (swapped);
+
+}

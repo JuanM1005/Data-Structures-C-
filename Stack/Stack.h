@@ -1,5 +1,5 @@
-#ifndef PILA_H
-#define PILA_H
+#ifndef STACK_H
+#define STACK_H
 
 #include <iostream>
 #include <stdexcept>
