@@ -1,45 +1,61 @@
 #include "Stack.h"
 
-Stack::Stack() {
+template <class T, size_t MaxSize>
+Stack<T, MaxSize>::Stack() {
     topIndex = -1; // Initialize stack as empty
 }
 
-bool Stack::isEmpty() {
+template <class T, size_t MaxSize>
+bool Stack<T, MaxSize>::isEmpty() const{
     return topIndex == -1;
 }
 
-bool Stack::isFull() {
-    return topIndex == MAX - 1;
+template <class T, size_t MaxSize>
+bool Stack<T, MaxSize>::isFull() const {
+    return topIndex == MaxSize - 1;
 }
 
-void Stack::push(int value) {
+template <class T, size_t MaxSize>
+void Stack<T, MaxSize>::push(const T& value) {
     if (isFull()) {
         throw std::overflow_error("Stack overflow: the stack is full.");
     }
     elements[++topIndex] = value; // Increment topIndex and insert value
 }
 
-void Stack::pop() {
+template <class T, size_t MaxSize>
+void Stack<T, MaxSize>::pop() {
     if (isEmpty()) {
         throw std::underflow_error("Stack underflow: the stack is empty.");
     }
     
-    int removed = elements[topIndex--];
+    T removed = elements[topIndex--];
     std::cout << removed << " popped from Stack." << std::endl;
 }
 
-int Stack::top() {
+template <class T, size_t MaxSize>
+T& Stack<T, MaxSize>::top() {
     if (isEmpty()) {
         throw std::runtime_error("Cannot get top: the stack is empty.");
     }
     return elements[topIndex];
 }
 
-int Stack::size() {
+template <class T, size_t MaxSize>
+const T& Stack<T, MaxSize>::top() const {
+    if (isEmpty()) {
+        throw std::runtime_error("Cannot get top: the stack is empty.");
+    }
+    return elements[topIndex];
+}
+
+template <class T, size_t MaxSize>
+int Stack<T, MaxSize>::size() {
     return topIndex + 1;
 }
 
-void Stack::display() {
+template <class T, size_t MaxSize>
+void Stack<T, MaxSize>::display() const {
     if (isEmpty()) {
         std::cout << "Stack is empty." << std::endl;
         return;
@@ -52,7 +68,8 @@ void Stack::display() {
     std::cout << std::endl;
 }
 
-void Stack::display_inpop() {
+template <class T, size_t MaxSize>
+void Stack<T, MaxSize>::display_inpop() {
     std::string pause; // variable to capture ENTER
     while (!isEmpty()) {
         std::cout << "Top: " << top() << " (press ENTER to pop)";

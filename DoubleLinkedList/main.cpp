@@ -3,7 +3,6 @@
 
 using namespace std;
 
-
 /*
     Aguirre Mares Juan Antonio - Ingenieria Informatica
     Centro Universitario de Ciencias Exactas e Ingenierías (CUCEI)

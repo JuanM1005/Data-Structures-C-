@@ -1,5 +1,5 @@
 #include <iostream>
-#include "menu.cpp"
+#include "Menu.cpp"
 
 /*
     Aguirre Mares Juan Antonio - Ingenieria Informatica
@@ -9,9 +9,8 @@
 */
 
 int main() {
-    Stack s;
-
-    menu(s);
+    
+    menu();
 
     return 0;
 }

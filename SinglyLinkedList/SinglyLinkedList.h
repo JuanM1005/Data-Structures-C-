@@ -4,80 +4,64 @@
 #include <iostream>
 #include <stdexcept>
 
-// Template structure for a node in a singly linked list
 template <typename T>
-    struct Node {
-        T data;              // The data stored in the node
-        Node<T>* next;       // Pointer to the next node in the list
+struct Node
+{
+    T data;        // The data stored in the node
+    Node<T> *next; // Pointer to the next node in the list
 
-        // Constructor to initialize a node with a given value
-        // and set its 'next' pointer to null
-        Node(const T& value) : data(value), next(nullptr) {}
-    };
+    // Constructor to initialize a node with a given value
+    // and set its 'next' pointer to null
+    Node(const T &value) : data(value), next(nullptr) {}
+};
 
-    // Template class for a singly linked list
-    template <class T>
-    class SinglyLinkedList {
-        private:
-            Node<T>* head;   // Pointer to the first node in the list
-            int count;       // Number of elements in the list
+template <class T>
+class SinglyLinkedList {
+    private:
+        Node<T> *head; // Pointer to the first node in the list
+        int count;     // Number of elements in the list
 
-            // Helper function for recursive printing
-            void printRecursiveHelper(Node<T>* current);
+        // Helper function for recursive printing
+        void printRecursiveHelper(Node<T> *current) const;
 
-        public:
-            // Constructor: initializes an empty list
-            SinglyLinkedList();
+    public:
+        // Constructor: initializes an empty list
+        SinglyLinkedList();
+        ~SinglyLinkedList();
 
-            // Destructor: releases all allocated memory
-            ~SinglyLinkedList();
+        void insertAtBeginning(const T &value);
+        void insertAtEnd(const T &value);
+        void insertAtPosition(const T &value, int position);
 
-            // Inserts a new node at the beginning of the list
-            void insertAtBeginning(const T& value);
+        // Removes the first node of the list
+        void removeAtBeggining();
+        // Removes the last node of the list
+        void removeAtEnd();
+        // Removes a node at a specific position (0-based)
+        void removeAtPosition(int position);
 
-            // Inserts a new node at the end of the list
-            void insertAtEnd(const T& value);
+        // Removes the first node that contains the given value. Returns true if value was found and removed, false otherwise.
+        bool remove(const T &value);
 
-            // Inserts a new node at a specific position in the list
-            void insertAtPosition(const T& value, int position);
+        // Checks if a value exists in the list
+        bool contains(const T &value) const;
 
-            // Removes the first node of the list
-            void removeAtBeggining();
+        bool isEmpty() const;
+        int size() const;
 
-            // Removes the last node of the list
-            void removeAtEnd();
+        T getAt(int position) const;
 
-            // Removes a node at a specific position
-            void removeAtPosition(int position);
+        void clear();
 
-            // Removes the first node that contains the given value
-            void remove(const T& value);
+        // Prints the list iteratively
+        void print() const;
+        // Prints the list recursively
+        void printRecursive() const;
 
-            // Checks if a value exists in the list
-            bool contains(const T& value);
+        // Removes adjacent duplicate elements from the list. Assumes the list is sorted for full deduplication.
+        void removeAdjacentDuplicates();
 
-            // Checks if the list is empty
-            bool isEmpty();
-
-            // Returns the number of elements in the list
-            int size() const;
-
-            // Gets the value at a specific position
-            T getAt(int position) const;
-
-            // Clears the list, deleting all nodes
-            void clear();
-
-            // Prints the list iteratively
-            void print();
-
-            // Prints the list recursively
-            void printRecursive();
-
-            // Given the head of a sorted linked list, delete all duplicates such that each element appears only once
-            void removeDuplicates();
-
-            // Sort elements
-            void sort();
-    };
+        // Sort elements
+        void sort();
+};
 #endif // SINGLYLINKEDLIST_H

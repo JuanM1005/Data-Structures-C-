@@ -1,70 +1,85 @@
 #include "Queue.h"
 
-Queue::Queue() {
-    front = 0;
-    rear = -1;
+template <class T, size_t MaxSize>
+Queue<T, MaxSize>::Queue() : front(0), rear(MaxSize - 1), count(0) {}
+
+template <class T, size_t MaxSize>
+bool Queue<T, MaxSize>::isEmpty() const {
+    return count == 0;
 }
 
-bool Queue::isEmpty() {
-    return rear < front;
+template <class T, size_t MaxSize>
+bool Queue<T, MaxSize>::isFull() const {
+    return count == MaxSize;
 }
 
-bool Queue::isFull() {
-    return rear == MAX - 1;
-}
-
-void Queue::enqueue(int value) {
-    if(isFull()) {
-        throw::overflow_error("Queue is full. Cannot enqueue.");
+template <class T, size_t MaxSize>
+void Queue<T, MaxSize>::enqueue(const T& value) {
+    if (isFull()) {
+        throw std::overflow_error("Queue is full. Cannot enqueue.");
     }
-
-    elements[++rear] = value;
+    rear = (rear + 1) % MaxSize;
+    elements[rear] = value;
+    count++;
 }
 
-void Queue::dequeue() {
-    if(isEmpty()) {
-        throw::underflow_error("Queue is empty. Cannot dequeue.");
-    }
-
-    front++;
-}
-
-int Queue::getRear() {
+template <class T, size_t MaxSize>
+void Queue<T, MaxSize>::dequeue() {
     if (isEmpty()) {
-        throw runtime_error("Queue is empty. Cannot get rear.");
+        throw std::underflow_error("Queue is empty. Cannot dequeue.");
     }
+    front = (front + 1) % MaxSize;
+    count--;
+}
 
-    return elements[rear];
-} 
-
-int Queue::getFront() {
+template <class T, size_t MaxSize>
+T& Queue<T, MaxSize>::getFront() {
     if (isEmpty()) {
-        throw runtime_error("Queue is empty. Cannot get front.");
+        throw std::runtime_error("Queue is empty.");
     }
-
     return elements[front];
-}   
+}
 
-void Queue::display() {
-    if(isEmpty()) {
+template <class T, size_t MaxSize>
+const T& Queue<T, MaxSize>::getFront() const {
+    if (isEmpty()) {
+        throw std::runtime_error("Queue is empty.");
+    }
+    return elements[front];
+}
+
+template <class T, size_t MaxSize>
+T& Queue<T, MaxSize>::getRear() {
+    if (isEmpty()) {
+        throw std::runtime_error("Queue is empty.");
+    }
+    return elements[rear];
+}
+
+template <class T, size_t MaxSize>
+const T& Queue<T, MaxSize>::getRear() const {
+    if (isEmpty()) {
+        throw std::runtime_error("Queue is empty.");
+    }
+    return elements[rear];
+}
+
+template <class T, size_t MaxSize>
+size_t Queue<T, MaxSize>::size() const {
+    return count;
+}
+
+template <class T, size_t MaxSize>
+void Queue<T, MaxSize>::display() const {
+    if (isEmpty()) {
         std::cout << "Queue is empty" << std::endl;
         return;
     }
 
-    for(int i = front; i <= rear; i++) {
-        std::cout << elements[i] << " ";
+    size_t current = front;
+    for (size_t i = 0; i < count; i++) {
+        std::cout << elements[current] << " ";
+        current = (current + 1) % MaxSize;
     }
-
     std::cout << std::endl;
-}
-
-void Queue::display_indeuqeue() {
-    std::string pause; // variable to capture ENTER
-    while(!isEmpty()) {
-        std::cout << "Front: " << getFront() << " (press ENTER to dequeue)";
-        std::getline(std::cin, pause); // wait for ENTER
-        dequeue();
-    }
-
-     std::cout << "Queue now is empty." << std::endl;
 }

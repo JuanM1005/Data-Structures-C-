@@ -29,6 +29,8 @@ class DoubleLinkedList {
         void insertAtPosition(const T& value, int position);
         void removeAtBeginning();
         void removeAtEnd();
+        void removeAtPosition(int position);
+        T getAt(int position) const;
 
         void displayForward() const;
         void displayBackward() const;
@@ -37,6 +39,9 @@ class DoubleLinkedList {
         void clear();
         int size() const;
         void sort();
+
+        bool contains(const T& value) const;
+        int indexof(const T& value) const;
 };
 
 #endif

@@ -4,22 +4,24 @@
 #include <iostream>
 #include <stdexcept>
 
+template <class T, size_t MaxSize = 100>
 class Stack {
     private:
-        static const int MAX = 100;
-        int elements[MAX];
+        T elements[MaxSize];
         int topIndex;
 
     public:
-        Stack();                 
-        bool isEmpty();        
-        bool isFull();        
-        void push(int value);  
-        void pop();        
-        int top();       
+        Stack();
+        bool isEmpty() const;
+        bool isFull() const;
+        void push(const T& value);
+        void pop();
+        T& top();
+        const T& top() const;
         int size();
-        void display();    
-        void display_inpop();      
+        void display() const;
+        void display_inpop();
 };
 
 #endif
+

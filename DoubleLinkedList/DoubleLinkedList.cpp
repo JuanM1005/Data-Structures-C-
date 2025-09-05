@@ -110,6 +110,65 @@ void DoubleLinkedList<T>::removeAtEnd() {
 }
 
 template <class T>
+void DoubleLinkedList<T>::removeAtPosition(int position) {
+    if (position < 0 || position >= count) {
+        throw std::out_of_range("Index out of range.");
+    }
+
+    if (position == 0) {
+        removeAtBeginning();
+        return;
+    }
+
+    if (position == count - 1) {
+        removeAtEnd();
+        return;
+    }
+
+    Node<T>* current;
+    if (position < count / 2) {
+        current = head;
+        for(int i = 0; i < position; i++) {
+            current = current->next;
+        }
+    } else {
+        current = tail;
+        for(int i = count - 1 ; i > position; i--) {
+            current = current->prev;
+        }
+    }
+
+    current->prev->next = current->next;
+    current->next->prev = current->prev;
+    delete current;
+    count--;
+}
+
+template <class T>
+T DoubleLinkedList<T>::getAt(int position) const {
+    if (position < 0 || position >= count) {
+        throw std::out_of_range("Index out of range.");
+    }
+
+    Node<T>* current;
+    if (position < count / 2) {
+        // Transverse from head
+        current = head;
+        for(int i = 0; i < position; i++) {
+            current = current->next;
+        }
+    } else {
+        // Transverse from tail
+        current = tail;
+        for(int i = count - 1 ; i > position; i--) {
+            current = current->prev;
+        }
+    }
+
+    return current->data;
+}
+
+template <class T>
 void DoubleLinkedList<T>::displayForward() const {
     if (isEmpty()) return;
 
@@ -142,18 +201,16 @@ bool DoubleLinkedList<T>::isEmpty() const {
 
 template <class T>
 void DoubleLinkedList<T>::clear() {
-    if (isEmpty()) {
-        std::cout << "List is already empty." << std::endl;
-        return;
+    Node<T>* current = head;
+    while (current != nullptr) {
+        Node<T>* next = current->next;
+        delete current;
+        current = next;
     }
-
-    while(!isEmpty()) {
-        removeAtBeginning();  
-    }
-
-    std::cout << "List cleared." << std::endl;
+    head = nullptr;
+    tail = nullptr;
+    count = 0;
 }
-
 
 template <class T>
 int DoubleLinkedList<T>::size() const {
@@ -185,4 +242,30 @@ void DoubleLinkedList<T>::sort() {
         }
     } while (swapped);
 
+}
+
+template <class T>
+bool DoubleLinkedList<T>::contains(const T& value) const {
+    Node<T>* temp = head;
+    
+    while (temp != nullptr) {
+        if (temp->data == value) return True;
+        temp = temp->next;
+    }
+
+    return false;
+}
+
+template <class T>
+int DoubleLinkedList<T>::indexof(const T& value) const {
+    Node<T>* temp = head;
+    int pos = 0;
+
+    while (temp != nullptr) {
+        if(temp->data == value) return pos;
+        temp = temp->next;
+        pos++;
+    }
+
+    return -1;
 }

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "menu.cpp"
+#include "Menu.cpp"
 
 /*
     Aguirre Mares Juan Antonio - Ingenieria Informatica
@@ -10,9 +10,8 @@
 
 
 int main() {
-    Queue q;
 
-    menu(q);
+    menu();
 
     return 0;
 }

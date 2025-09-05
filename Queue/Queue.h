@@ -2,25 +2,34 @@
 #define QUEUE_H
 
 #include <iostream>
-using namespace std;
+#include <stdexcept>
 
+template <class T, size_t MaxSize = 100>
 class Queue {
     private:
-        static const int MAX = 100;  // Maximum size of the queue
-        int elements[MAX];
-        int front;
-        int rear;
+        T elements[MaxSize];
+        size_t front;
+        size_t rear;
+        size_t count;
 
     public:
-        Queue();                
-        bool isEmpty();
-        bool isFull();
-        void enqueue(int value);
+        Queue();
+        
+        bool isEmpty() const;
+        bool isFull() const;
+        
+        void enqueue(const T& value);
         void dequeue();
-        int getRear();
-        int getFront();
-        void display();
-        void display_indeuqeue();
+        
+        T& getFront();
+        const T& getFront() const;
+
+        T& getRear();
+        const T& getRear() const;
+
+        size_t size() const;
+        
+        void display() const;
 };
 
 #endif
