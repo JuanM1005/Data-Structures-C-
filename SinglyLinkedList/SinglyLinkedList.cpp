@@ -26,7 +26,6 @@ void SinglyLinkedList<T>::insertAtEnd(const T& value) {
 
     if(isEmpty()) {                         // if list is empty, new node is head
         head = newNode;
-        count++;                            // increase count here (fix missing in original)
     } else {
         Node<T>* temp = head;
         // traverse to last node
@@ -34,8 +33,8 @@ void SinglyLinkedList<T>::insertAtEnd(const T& value) {
             temp = temp->next;
         }
         temp->next = newNode;               // link last node to new node
-        count++;                           // increase count
     }
+    count++;                                // increase count
 }
 
 // Inserts a new node at a given position (0-based)
@@ -99,16 +98,16 @@ void SinglyLinkedList<T>::removeAtEnd() {
     count--;  // decrease count
 }
 
-// Removes node at a specific position (1-based)
+// Removes node at a specific position (0-based)
 template <class T>
 void SinglyLinkedList<T>::removeAtPosition(int position) {
     // check valid position
-    if (position < 1 || position > count) {
-        throw std::out_of_range("Invalid position");
+    if (position < 0 || position >= count) {
+        throw std::out_of_range("Index out of range");
     }
 
-    // if position is 1, remove at beginning
-    if (position == 1) {
+    // if position is 0, remove at beginning
+    if (position == 0) {
         removeAtBeggining();
         return;
     }
@@ -116,7 +115,7 @@ void SinglyLinkedList<T>::removeAtPosition(int position) {
     Node<T>* current = head;
 
     // traverse to node before the one to be removed
-    for(int i = 1; i < position - 1; i++) {
+    for(int i = 0; i < position - 1; i++) {
         current = current->next;
     }
 
@@ -128,15 +127,15 @@ void SinglyLinkedList<T>::removeAtPosition(int position) {
 
 // Removes first node containing the specified value
 template <class T>
-void SinglyLinkedList<T>::remove(const T& value) {
+bool SinglyLinkedList<T>::remove(const T& value) {
     if (isEmpty()) {
-        throw std::runtime_error("List is empty");
+        return false;
     }
 
     // if value is at the head node
     if (head->data == value) {
         removeAtBeggining();
-        return;
+        return true;
     }
 
     Node<T>* current = head;
@@ -151,32 +150,31 @@ void SinglyLinkedList<T>::remove(const T& value) {
         current->next = current->next->next;    // bypass node
         delete temp;                            // free memory
         count--;                               // decrease count
+        return true;
     } else {
-        throw std::runtime_error("Value not found in the list");
+        return false;
     }
 }
 
 // Checks if the list contains a given value
 template <class T>
-bool SinglyLinkedList<T>::contains(const T& value) {
+bool SinglyLinkedList<T>::contains(const T& value) const {
     if(isEmpty()) return false;
 
     Node<T>* temp = head;
     while(temp != nullptr) {
         if(temp->data == value) {
-            std::cout << "The list contains the value: " << value << std::endl;
             return true;
         }
         temp = temp->next;
     }
 
-    std::cout << "The list doesn't contain the value: " << value << std::endl;
     return false;
 }
 
 // Checks if the list is empty
 template <class T>
-bool SinglyLinkedList<T>::isEmpty() {
+bool SinglyLinkedList<T>::isEmpty() const {
     return head == nullptr;
 }
 
@@ -214,7 +212,7 @@ void SinglyLinkedList<T>::clear() {
 
 // Prints the list iteratively
 template <class T>
-void SinglyLinkedList<T>::print() {
+void SinglyLinkedList<T>::print() const {
     if(isEmpty()) return;
 
     Node<T>* temp = head;
@@ -228,7 +226,7 @@ void SinglyLinkedList<T>::print() {
 
 // Helper function to print list recursively starting from given node
 template <class T>
-void SinglyLinkedList<T>::printRecursiveHelper(Node<T>* current) {
+void SinglyLinkedList<T>::printRecursiveHelper(Node<T>* current) const {
     if(isEmpty()) return;
 
     if (current == nullptr) {
@@ -242,15 +240,14 @@ void SinglyLinkedList<T>::printRecursiveHelper(Node<T>* current) {
 
 // Public function to print list recursively starting from head
 template <class T>
-void SinglyLinkedList<T>::printRecursive() {
+void SinglyLinkedList<T>::printRecursive() const {
     printRecursiveHelper(head);
     std::cout << std::endl;
 }
 
 template <class T>
-void SinglyLinkedList<T>::removeDuplicates() {
-    if (isEmpty()) {
-        std::cout << "The list is empty. No duplicates to remove." << std::endl;
+void SinglyLinkedList<T>::removeAdjacentDuplicates() {
+    if (isEmpty() || head->next == nullptr) {
         return;
     }
 
@@ -272,7 +269,6 @@ void SinglyLinkedList<T>::removeDuplicates() {
 template <class T>
 void SinglyLinkedList<T>::sort() {
     if (isEmpty() || head->next == nullptr) {
-        std::cout << "The list is empty or contains only one node. Sorting is not required." << std::endl;
         return;
     }
 

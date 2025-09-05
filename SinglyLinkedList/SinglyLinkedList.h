@@ -23,7 +23,7 @@ template <typename T>
             int count;       // Number of elements in the list
 
             // Helper function for recursive printing
-            void printRecursiveHelper(Node<T>* current);
+            void printRecursiveHelper(Node<T>* current) const;
 
         public:
             // Constructor: initializes an empty list
@@ -47,17 +47,17 @@ template <typename T>
             // Removes the last node of the list
             void removeAtEnd();
 
-            // Removes a node at a specific position
+            // Removes a node at a specific position (0-based)
             void removeAtPosition(int position);
 
-            // Removes the first node that contains the given value
-            void remove(const T& value);
+            // Removes the first node that contains the given value. Returns true if value was found and removed, false otherwise.
+            bool remove(const T& value);
 
             // Checks if a value exists in the list
-            bool contains(const T& value);
+            bool contains(const T& value) const;
 
             // Checks if the list is empty
-            bool isEmpty();
+            bool isEmpty() const;
 
             // Returns the number of elements in the list
             int size() const;
@@ -69,13 +69,13 @@ template <typename T>
             void clear();
 
             // Prints the list iteratively
-            void print();
+            void print() const;
 
             // Prints the list recursively
-            void printRecursive();
+            void printRecursive() const;
 
-            // Given the head of a sorted linked list, delete all duplicates such that each element appears only once
-            void removeDuplicates();
+            // Removes adjacent duplicate elements from the list. Assumes the list is sorted for full deduplication.
+            void removeAdjacentDuplicates();
 
             // Sort elements
             void sort();

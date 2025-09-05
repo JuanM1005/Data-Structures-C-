@@ -23,7 +23,7 @@ void menu() {
         cout << "11. Check if value exists\n";
         cout << "12. Get size\n";
         cout << "13. Clear list\n";
-        cout << "14. Remove duplicate elements\n";
+        cout << "14. Remove adjacent duplicates (requires sorted list)\n";
         cout << "15. Sort elements\n";
         cout << "0. Exit\n";
         cout << "Choose an option: ";
@@ -44,7 +44,7 @@ void menu() {
                 case 3:
                     cout << "Enter value to insert: ";
                     cin >> value;
-                    cout << "Enter position: ";
+                    cout << "Enter position (0-based): ";
                     cin >> position;
                     list.insertAtPosition(value, position);
                     break;
@@ -57,7 +57,7 @@ void menu() {
                     cout << "Removed element at end.\n";
                     break;
                 case 6:
-                    cout << "Enter position to remove: ";
+                    cout << "Enter position to remove (0-based): ";
                     cin >> position;
                     list.removeAtPosition(position);
                     cout << "Removed element at position " << position << ".\n";
@@ -65,8 +65,11 @@ void menu() {
                 case 7:
                     cout << "Enter value to remove: ";
                     cin >> value;
-                    list.remove(value);
-                    cout << "Removed value " << value << ".\n";
+                    if (list.remove(value)) {
+                        cout << "Successfully removed value " << value << ".\n";
+                    } else {
+                        cout << "Value " << value << " not found in the list.\n";
+                    }
                     break;
                 case 8:
                     cout << "List contents:\n";
@@ -77,7 +80,7 @@ void menu() {
                     list.printRecursive();
                     break;
                 case 10:
-                    cout << "Enter position to get value: ";
+                    cout << "Enter position to get value (0-based): ";
                     cin >> position;
                     cout << "Value at position " << position << ": " << list.getAt(position) << endl;
                     break;
@@ -99,7 +102,7 @@ void menu() {
                 case 14:
                     cout << "Sorting the list automatically before removing duplicates..." << endl;
                     list.sort();
-                    list.removeDuplicates();
+                    list.removeAdjacentDuplicates();
                     list.print();
                     break;
                 case 15:
